@@ -24,7 +24,9 @@ app.post("/deploy", (req, res) => {
   console.log("HEADERS:", req.headers);
   console.log("RAW BODY:", req.rawBody);
   console.log("BODY:", req.body);
-
+  if (!req.rawBody) {
+    return false;
+  }
   if (!verifySignature(req)) {
     return res.status(401).send("Invalid signature");
   }
